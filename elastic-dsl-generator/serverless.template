@@ -1,0 +1,26 @@
+{
+  "Description": "Elastic DSL Query Generator.",
+  "Resources": {
+    "GetArticle": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "com.serverless.dsl.generator.function.GetDSLQuery",
+        "Runtime" : "java8",
+        "CodeUri" : "./target/demo-1.0.0.jar",
+        "Policies": [
+          "AmazonDynamoDBReadOnlyAccess",
+          "AmazonS3ReadOnlyAccess"
+        ],
+		"Events": {
+          "GetResource": {
+            "Type": "Api",
+            "Properties": {
+              "Path": "/",
+              "Method": "get"
+            }
+          }
+        }
+      }
+    }
+  }
+}
