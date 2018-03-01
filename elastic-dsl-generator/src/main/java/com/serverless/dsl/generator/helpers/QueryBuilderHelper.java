@@ -17,7 +17,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 
 public class QueryBuilderHelper extends AbstractVideoSearchingRepository {
-	protected Client elasticsearchClient = new TransportClient().addTransportAddress(new InetSocketTransportAddress("http://52.5.90.133", 9200));
+	private Client elasticsearchClient = new TransportClient().addTransportAddress(new InetSocketTransportAddress("localhost", 9200));
     private static final String RELEVANCY_SCORE = "_score";
     private static final String RELEVANCY = "relevancy";
     private static final String SORT_PROPERTY = ".sort";

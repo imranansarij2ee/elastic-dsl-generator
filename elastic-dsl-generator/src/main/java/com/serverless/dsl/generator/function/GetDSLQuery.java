@@ -45,8 +45,6 @@ public class GetDSLQuery implements RequestHandler<ServerlessInput, ServerlessOu
 			 assetType = serverlessInput.getQueryStringParameters().get(AssetTypes);
 		}
 		
-		
-		AmazonS3 s3 = AmazonS3ClientBuilder.standard().build(); 
 		try {
 
 			if (StringUtils.isEmpty(queryString) && StringUtils.isEmpty(filterQueryString) && StringUtils.isEmpty(assetType)) {
@@ -54,7 +52,7 @@ public class GetDSLQuery implements RequestHandler<ServerlessInput, ServerlessOu
 
 			} else {
 				
-				final QueryBuilderHelper queryBuilder = new QueryBuilderHelper();
+				 QueryBuilderHelper queryBuilder = new QueryBuilderHelper();
 				query = assetType == null || assetType == StringUtils.EMPTY
 						? queryBuilder.findByQuery(DOCUMENT_TYPES, queryString, filterQueryString).toString()
 						: queryBuilder.findByQuery(DOCUMENT_TYPES, queryString, filterQueryString, parseAssetTypes(assetType)).toString();
@@ -75,8 +73,8 @@ public class GetDSLQuery implements RequestHandler<ServerlessInput, ServerlessOu
 	}
 	
 	private String toJSON(String query) {
-		Gson gconverter = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-		return gconverter.toJson(query);
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		return gson.toJson(query);
 	}
 
 	private String[] parseAssetTypes(String assetType) {
